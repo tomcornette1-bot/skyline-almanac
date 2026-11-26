@@ -95,7 +95,7 @@ h2 { font-size: 1.3rem; letter-spacing: 0.01em; }
 :root[data-theme="contrast"] .card { border-width: 2px; }
 
 /* ---------- App bar ---------- */
-.appbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 1000; background: var(--surface); border-bottom: 1px solid var(--line); }
+.appbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 1100; background: var(--surface); border-bottom: 1px solid var(--line); }
 .appbar-inner {
   max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
   padding-block: 10px;
@@ -298,3 +298,4 @@ select { padding-right: 6px; max-width: 100%; }
 .foot { padding-top: 0; }
 .foot p { margin: 0; font-size: 0.82em; color: var(--muted); max-width: 110ch; }
 @media (max-width: 700px) { .appbar { position: static; } .brand span { font-size: 1.1rem; } }
+.map-wrap { isolation: isolate; }
