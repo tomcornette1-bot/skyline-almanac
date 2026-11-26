@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Skyline Almanac</title>
+  <meta name="description" content="Local weather, radar, forecast-versus-observed comparisons and long-term station records.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to forecast</a>
+  <header class="appbar">
+    <div class="appbar-inner">
+      <div class="brand">
+        <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path d="M2 24l7-9 5 5 6-10 8 14z" fill="var(--accent)"/><circle cx="22" cy="7" r="3.2" fill="var(--warm)"/></svg>
+        <span>Skyline Almanac</span>
+      </div>
+      <form id="search-form" class="search" role="search" autocomplete="off">
+        <label for="search" class="sr-only">City, city and state, or ZIP code</label>
+        <input id="search" type="search" placeholder="City, State or ZIP" inputmode="search" enterkeyhint="search">
+        <button type="submit" class="btn">Go</button>
+      </form>
+      <div class="favs">
+        <label for="fav-select" class="sr-only">Favorite ZIPs</label>
+        <select id="fav-select"></select>
+        <button type="button" id="fav-toggle" class="btn btn-ghost" aria-pressed="false">Save ZIP</button>
+      </div>
+      <div class="prefs">
+        <fieldset class="seg" aria-label="Units">
+          <legend class="sr-only">Units</legend>
+          <input type="radio" name="units" id="u-us" value="us"><label for="u-us">°F</label>
+          <input type="radio" name="units" id="u-metric" value="metric"><label for="u-metric">°C</label>
+        </fieldset>
+        <label for="theme" class="sr-only">Display mode</label>
+        <select id="theme" title="Display mode">
+          <option value="system">System</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="black">Black</option>
+          <option value="contrast">High contrast</option>
+        </select>
+        <label class="check" title="Compact layout"><input type="checkbox" id="compact"> Compact</label>
+      </div>
+    </div>
+    <div class="appbar-inner sub">
+      <div id="fav-chips" class="chips" aria-label="Favorites"></div>
+      <div id="search-results" class="search-results" aria-live="polite"></div>
+    </div>
+  </header>
+  <div id="live" class="sr-only" aria-live="polite"></div>
+
+  <main id="main" class="wrap">
+    <!-- 1. Location, date, alerts -->
+    <section class="sec place" aria-labelledby="place-name">
+      <h1 id="place-name">Loading…</h1>
+      <p id="place-sub" class="muted"></p>
+      <div id="alerts" class="alerts" aria-label="Weather alerts"></div>
+    </section>
+
+    <div class="grid-2">
+      <!-- 2. Current conditions -->
+      <section class="sec card" aria-labelledby="h-current">
+        <h2 id="h-current">Right now</h2>
+        <div id="current"></div>
+      </section>
+      <!-- 3. Today in the historical record -->
+      <section class="sec card" aria-labelledby="h-today">
+        <h2 id="h-today">Today in the record</h2>
+        <div id="today-history"></div>
+      </section>
+    </div>
+
+    <!-- 4. Seven-day forecast -->
+    <section class="sec card" aria-labelledby="h-7day">
+      <div class="sec-head"><h2 id="h-7day">Seven days</h2><span class="muted small">Low / high · telescope outlook for each night</span></div>
+      <div id="seven-day"></div>
+    </section>
+
+    <!-- 5. Next 24 hours -->
+    <section class="sec card" aria-labelledby="h-24">
+      <div class="sec-head">
+        <h2 id="h-24">Next 24 hours</h2>
+        <div class="btn-row">
+          <button type="button" class="btn btn-ghost btn-small" id="next24-prev" aria-controls="next24-strip">Earlier</button>
+          <button type="button" class="btn btn-ghost btn-small" id="next24-next" aria-controls="next24-strip">Later</button>
+        </div>
+      </div>
+      <ol id="next24-strip" class="strip" tabindex="0" aria-label="Hourly forecast, use arrow keys to scroll"></ol>
+      <p id="next24-units" class="source"></p>
+    </section>
+
+    <!-- 6. Hourly chart -->
+    <section class="sec card" aria-labelledby="h-hourly">
+      <div class="sec-head"><h2 id="h-hourly">Hourly weather</h2></div>
+      <div class="controls">
+        <fieldset class="seg">
+          <legend class="sr-only">Time range</legend>
+          <input type="radio" name="hrange" id="hr-24" value="last24"><label for="hr-24">Last 24 h</label>
+          <input type="radio" name="hrange" id="hr-3" value="last3"><label for="hr-3">Last 3 days</label>
+          <input type="radio" name="hrange" id="hr-p7" value="prev7"><label for="hr-p7">Previous 7 days</label>
+          <input type="radio" name="hrange" id="hr-n7" value="next7" checked><label for="hr-n7">Next 7 days</label>
+        </fieldset>
+        <fieldset class="toggles">
+          <legend class="sr-only">Variables</legend>
+          <label class="check"><input type="checkbox" id="hv-temp"> Temperature</label>
+          <label class="check"><input type="checkbox" id="hv-rh"> Humidity</label>
+          <label class="check"><input type="checkbox" id="hv-pres"> Pressure (hPa)</label>
+        </fieldset>
+      </div>
+      <div id="hourly-chart" class="chart"></div>
+      <label for="hourly-slider" class="sr-only">Selected hour</label>
+      <input type="range" id="hourly-slider" class="slider" min="0" max="0" value="0">
+      <div id="hourly-readout" class="readout"></div>
+      <p class="source">Past hours are modeled estimates (Open-Meteo), not station measurements. Future hours are forecasts.</p>
+    </section>
+
+    <!-- 7. Radar and map -->
+    <section class="sec card" aria-labelledby="h-map">
+      <div class="sec-head"><h2 id="h-map">Radar and map</h2></div>
+      <fieldset class="toggles layer-toggles">
+        <legend class="sr-only">Map layers</legend>
+        <label class="check"><input type="checkbox" id="layer-radar"> Radar</label>
+        <label class="check"><input type="checkbox" id="layer-wind"> Wind</label>
+        <label class="check"><input type="checkbox" id="layer-temp"> Temperature</label>
+        <label class="check"><input type="checkbox" id="layer-total"> 24-hour total</label>
+      </fieldset>
+      <div class="map-wrap">
+        <div id="map" role="region" aria-label="Interactive map. Use arrow keys to pan and plus or minus to zoom."></div>
+        <div id="map-legend" class="map-legend" hidden><span class="small">2 m temperature, <span id="legend-units">°F</span></span><div id="map-legend-scale" class="legend-scale"></div></div>
+      </div>
+      <div id="map-controls" class="timeline">
+        <button type="button" id="radar-play" class="btn" aria-pressed="false">Play</button>
+        <label for="radar-slider" class="sr-only">Radar frame</label>
+        <input type="range" id="radar-slider" class="slider" min="0" max="0" value="0">
+        <button type="button" id="radar-now" class="btn btn-ghost btn-small">Latest observed</button>
+        <button type="button" id="radar-forecast" class="btn btn-ghost btn-small">Jump to forecast</button>
+      </div>
+      <div id="radar-label" class="readout" aria-live="off"></div>
+      <p id="radar-status" class="small"></p>
+      <p id="grid-hour" class="small muted"></p>
+      <p id="grid-status" class="small"></p>
+      <p class="source">Observed radar: RainViewer mosaic. Forecast radar: NOAA HRRR simulated reflectivity via Iowa Environmental Mesonet (contiguous U.S.). Wind, temperature and 24-hour totals are Open-Meteo model values at sample points across the visible map. The 24-hour total is liquid-water equivalent including melted snow, summed over the 24 hours ending at the modeled hour; 0 means the model reported no precipitation. Tap a marker for rain and snowfall depth separately. Wind arrows point the way the wind is blowing.</p>
+    </section>
+
+    <!-- 8. Past seven completed days -->
+    <section class="sec card" aria-labelledby="h-past">
+      <div class="sec-head"><h2 id="h-past">Past seven days: forecast vs. observed</h2></div>
+      <div id="past-week"></div>
+    </section>
+
+    <!-- 9. Historical temperatures -->
+    <section class="sec card" aria-labelledby="h-hist">
+      <div class="sec-head"><h2 id="h-hist">Historical temperatures</h2></div>
+      <div class="controls">
+        <label class="field">City
+          <select id="hist-city">
+            <option value="winchester">Winchester</option>
+            <option value="dc">Washington, DC</option>
+            <option value="both">Both</option>
+          </select>
+        </label>
+        <fieldset class="seg">
+          <legend class="sr-only">Temperature</legend>
+          <input type="radio" name="hmode" id="hm-high" value="high" checked><label for="hm-high">High on this date</label>
+          <input type="radio" name="hmode" id="hm-low" value="low"><label for="hm-low">Low on this date</label>
+          <input type="radio" name="hmode" id="hm-yearly" value="yearly"><label for="hm-yearly">Yearly record highs and lows</label>
+        </fieldset>
+      </div>
+      <div id="hist-legend" class="legend small"></div>
+      <div id="hist-chart" class="chart"></div>
+      <label for="hist-year" class="sr-only">Year</label>
+      <input type="range" id="hist-year" class="slider" min="1900" max="2025" value="2025">
+      <div id="hist-readout" class="readout"></div>
+      <div id="hist-notes" class="source"></div>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <p><strong>Data and credits.</strong> Weather, geocoding, air quality and archived GFS runs:
+      <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0). ZIP lookup: <a href="https://www.zippopotam.us/">Zippopotam.us</a>.
+      Alerts: <a href="https://www.weather.gov/documentation/services-web-api">National Weather Service</a>.
+      Radar: <a href="https://www.rainviewer.com/api.html">RainViewer</a> and NOAA HRRR via <a href="https://mesonet.agron.iastate.edu/">Iowa Environmental Mesonet</a>.
+      Station observations: Iowa Environmental Mesonet. Historical series: <a href="https://www.rcc-acis.org/">ACIS</a> (NOAA Regional Climate Centers).
+      Map: <a href="https://leafletjs.com/">Leaflet</a> and <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>. Astronomy: <a href="https://github.com/cosinekitty/astronomy">Astronomy Engine</a>.
+      Forecasts and model estimates can be wrong; check official NWS products for decisions that matter.</p>
+  </footer>
+
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="vendor/astronomy.browser.min.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/wx.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
