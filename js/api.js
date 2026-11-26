@@ -79,6 +79,10 @@
           return hay.some((h) => h === f || h.startsWith(f)) || (full && r.region.toLowerCase() === full.toLowerCase());
         })
       );
+      // "Boise, ID" style queries: prefer exact name matches, then the most populous one.
+      const exact = results.filter((r) => r.name.toLowerCase() === name.toLowerCase());
+      if (exact.length) results = exact;
+      if (results.length > 1 && results[0].population > 20 * (results[1].population || 1)) results = [results[0]];
     }
     return results;
   };

@@ -43,14 +43,21 @@ All of these are free and keyless, and the browser calls them directly:
 
 Before a public deployment, read each provider's terms. Open-Meteo's free tier is for non-commercial use. OpenStreetMap's tile servers are meant for light use only, so switch to a commercial tile provider if traffic grows. RainViewer's free tiles go up to zoom 7, and the map scales them past that.
 
-## Things to check against the live services
+## Live checks
 
-My build sandbox had no network access to these providers. I tested every flow against stand-in responses that copy each API's documented shape. The first time you run the app live, check these four points:
+Two GitHub Actions workflows check the app against the real services:
 
-1. **Single Runs model id**: the past-week forecast rows show "Run unavailable". If they all do, change `CONFIG.gfsModel`, for example to `gfs_seamless` or `ncep_gfs025`.
-2. **HRRR forecast radar**: the radar status line says "Forecast radar (HRRR) is unavailable". If so, look at the run-info URL and tile template in `api.hrrrMeta` and `api.hrrrTileUrl` in `js/api.js`.
-3. **ACIS station ids** (`USC00449186`, `USC00449181`, `DCAthr 9`): if the records cards say ACIS is unavailable, try adding the id type, for example `"USC00449186 6"`.
-4. **CORS**: everything runs in the browser, so every provider has to allow cross-origin requests. All of them do today. If one stops, put a small proxy in front of it.
+- **Probe data providers** (`tools/probe.sh`) calls each provider endpoint. It records the status code, the CORS header and the first part of each response.
+- **Live smoke test** (`tools/smoke.js`) loads the app in headless Chromium against live data, for Winchester, DC, Boise and London. It records what each section shows.
+
+Both write their results to the `probe-results` branch. You can run either one again from the Actions tab.
+
+The checks on 2026-11-26 confirmed these points:
+- Every provider allows browser (CORS) requests.
+- `gfs_global` returns the archived GFS runs.
+- The IEM HRRR run info and tiles work.
+- The ACIS station ids work as written.
+- The Nov 26 series reach back to 1912 for Winchester and 1872 for DC.
 
 Each section loads, fails and retries on its own. If one provider is down, the rest of the page keeps working.
 

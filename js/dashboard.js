@@ -235,7 +235,7 @@
     }
     const avgCloud = best.reduce((s, h) => s + h.cloud, 0) / best.length;
     const avgMoon = best.reduce((s, h) => s + h.moonGlow, 0) / best.length;
-    let rating = "Fair";
+    let rating = best.length >= 2 ? "Fair" : "Poor";
     if (best.length >= 4 && avgCloud <= 10 && avgMoon <= 0.25) rating = "Excellent";
     else if (best.length >= 3 && avgCloud <= 20 && avgMoon <= 0.6) rating = "Good";
     const endMs = best[best.length - 1].t + 3600e3;
@@ -261,8 +261,8 @@
       .map((d, i) => {
         const tel = D.telescope(d.date, hours, ctx.loc, tz);
         const amounts = [];
-        if (d.rain > 0.05) amounts.push(`Rain ${fmt.precip(d.rain)}`);
-        if (d.snow > 0.05) amounts.push(`Snow ${fmt.snow(d.snow)}`);
+        if (W.conv.precipMm(d.rain) >= (W.units() === "us" ? 0.005 : 0.05)) amounts.push(`Rain ${fmt.precip(d.rain)}`);
+        if (W.conv.snowCm(d.snow) >= 0.05) amounts.push(`Snow ${fmt.snow(d.snow)}`);
         return `<li class="day">
           <div class="day-name"><strong>${i === 0 ? "Today" : time.weekdayShort(d.date)}</strong><span class="muted">${time.monthDay(d.date)}</span></div>
           <div class="day-icon">${W.wx.icon(d.code, true, 36)}</div>
@@ -291,8 +291,8 @@
         const brk = d !== lastDate && i > 0 ? `<li class="hr-break" aria-hidden="true"><span>${time.weekdayShort(d)} ${time.monthDay(d)}</span></li>` : "";
         lastDate = d;
         const amt = [];
-        if (h.rain > 0) amt.push(`<span title="Rain in the hour ending at this time">${fmt.precip(h.rain)}</span>`);
-        if (h.snow > 0) amt.push(`<span title="Snowfall in the hour ending at this time">${fmt.snow(h.snow)} snow</span>`);
+        if (W.conv.precipMm(h.rain) >= (W.units() === "us" ? 0.005 : 0.05)) amt.push(`<span title="Rain in the hour ending at this time">${fmt.precip(h.rain)}</span>`);
+        if (W.conv.snowCm(h.snow) >= 0.05) amt.push(`<span title="Snowfall in the hour ending at this time">${fmt.snow(h.snow)} snow</span>`);
         return `${brk}<li class="hr" aria-label="${esc(time.dateTimeLabel(h.t, tz))}: ${fmt.tC(h.temp)}, ${esc(W.wx.desc(h.code))}">
           <span class="hr-time">${i === 0 ? "Now" : time.hourLabel(h.t, tz)}</span>
           ${W.wx.icon(h.code, h.isDay, 32)}
@@ -341,11 +341,24 @@
       // Forecast runs: issue date = valid date − lead
       const runDates = [...new Set(dates.flatMap((d) => leads.map((l) => time.addDays(d, -l))))].sort();
       const runs = {};
-      await Promise.all(
-        runDates.map((r) =>
-          W.api.singleRun(ctx.loc, tz, r, ctx.signal).then((v) => (runs[r] = v)).catch(() => (runs[r] = null))
-        )
-      );
+      // Open-Meteo rate-limits bursts, so fetch two runs at a time and retry a 429 with backoff.
+      const queue = runDates.slice();
+      const worker = async () => {
+        while (queue.length) {
+          const r = queue.shift();
+          for (let attempt = 0; attempt < 4; attempt++) {
+            try {
+              runs[r] = await W.api.singleRun(ctx.loc, tz, r, ctx.signal);
+              break;
+            } catch (e) {
+              runs[r] = null;
+              if (e.status !== 429 || !ctx.current()) break;
+              await new Promise((res) => setTimeout(res, 1500 * 2 ** attempt));
+            }
+          }
+        }
+      };
+      await Promise.all([worker(), worker()]);
       if (!ctx.current()) return;
       // Calendar-date records for each day
       const recs = {};
