@@ -3,7 +3,7 @@ const { chromium, devices } = require("playwright");
 const fs = require("fs");
 const OUT = "probe-results/smoke";
 fs.mkdirSync(OUT, { recursive: true });
-const BASE = "http://localhost:8000/";
+const BASE = process.env.SMOKE_BASE || "http://localhost:8000/";
 const log = [];
 const say = (s) => { console.log(s); log.push(s); };
 (async () => {

@@ -17,6 +17,14 @@ jobs:
       - run: python3 -m http.server 8000 & sleep 2
       - run: ./tools/probe.sh > /dev/null
       - run: node tools/smoke.js
+      - name: Check the published GitHub Pages site
+        run: |
+          sleep 60
+          for f in "" vendor/leaflet/leaflet.js vendor/astronomy.browser.min.js js/app.js; do
+            echo "$(curl -s -o /dev/null -w '%{http_code}' https://tomcornette1-bot.github.io/skyline-almanac/$f) /$f" | tee -a probe-results/pages-check.txt
+          done
+          mv probe-results/smoke probe-results/smoke-local
+          SMOKE_BASE=https://tomcornette1-bot.github.io/skyline-almanac/ node tools/smoke.js || true
       - name: Save results to the probe-results branch
         if: always()
         run: |
