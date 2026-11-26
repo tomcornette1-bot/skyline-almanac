@@ -1,0 +1,56 @@
+// Opens the app against live providers and records what each section shows.
+const { chromium, devices } = require("playwright");
+const fs = require("fs");
+const OUT = "probe-results/smoke";
+fs.mkdirSync(OUT, { recursive: true });
+const BASE = "http://localhost:8000/";
+const log = [];
+const say = (s) => { console.log(s); log.push(s); };
+(async () => {
+  const browser = await chromium.launch();
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, timezoneId: "America/New_York" });
+  const page = await ctx.newPage();
+  const errors = [];
+  page.on("pageerror", (e) => errors.push("PAGEERROR " + e.message));
+  page.on("console", (m) => { if (m.type() === "error") errors.push(m.text()); });
+  page.on("requestfailed", (r) => errors.push("REQFAIL " + r.url().slice(0, 160) + " " + (r.failure() || {}).errorText));
+  page.on("response", (r) => { if (r.status() >= 400) errors.push("HTTP " + r.status() + " " + r.url().slice(0, 200)); });
+  const txt = async (s) => (await page.locator(s).innerText()).replace(/\s+/g, " ");
+  const dump = async (label) => {
+    for (const s of ["#place-name", "#place-sub", "#alerts", "#current", "#today-history", "#seven-day", "#next24-strip", "#hourly-readout", "#radar-label", "#radar-status", "#grid-hour", "#grid-status", "#past-week", "#hist-readout", "#hist-notes"])
+      say(`[${label}] ${s}: ${(await txt(s)).slice(0, 1500)}`);
+  };
+  await page.goto(BASE + "?zip=22601");
+  await page.waitForTimeout(25000);
+  await dump("winchester");
+  await page.screenshot({ path: OUT + "/winchester.png", fullPage: true });
+  await page.check("#layer-wind"); await page.check("#layer-temp"); await page.check("#layer-total");
+  await page.waitForTimeout(6000);
+  say("markers: " + (await page.locator(".wind-mk").count()) + " " + (await page.locator(".temp-mk").count()) + " " + (await page.locator(".total-mk").count()));
+  await page.click("#radar-forecast"); await page.waitForTimeout(4000);
+  say("forecast frame: " + (await txt("#radar-label")));
+  await page.locator("#map").scrollIntoViewIfNeeded();
+  await page.screenshot({ path: OUT + "/map-forecast.png" });
+  await page.click("#radar-now"); await page.waitForTimeout(4000);
+  await page.screenshot({ path: OUT + "/map-observed.png" });
+  await page.click('label[for="hm-yearly"]'); await page.waitForTimeout(12000);
+  say("yearly: " + (await txt("#hist-readout")) + " | " + (await txt("#hist-notes")).slice(0, 800));
+  await page.locator("#hist-chart").scrollIntoViewIfNeeded();
+  await page.screenshot({ path: OUT + "/hist-yearly.png" });
+  await page.fill("#search", "Winchester"); await page.press("#search", "Enter"); await page.waitForTimeout(4000);
+  say("ambiguous: " + (await txt("#search-results")).slice(0, 600));
+  await page.fill("#search", "Boise, ID"); await page.press("#search", "Enter"); await page.waitForTimeout(25000);
+  await dump("boise");
+  await page.fill("#search", "London, United Kingdom"); await page.press("#search", "Enter"); await page.waitForTimeout(20000);
+  await dump("london");
+  await page.goto(BASE + "?zip=20001"); await page.waitForTimeout(20000);
+  await dump("dc");
+  say("ERRORS: " + JSON.stringify(errors, null, 1));
+  const phone = await browser.newContext({ ...devices["iPhone 13"], timezoneId: "America/New_York" });
+  const pp = await phone.newPage();
+  await pp.goto(BASE + "?zip=22601"); await pp.waitForTimeout(20000);
+  say("phone width: " + JSON.stringify(await pp.evaluate(() => [document.documentElement.scrollWidth, innerWidth])));
+  await pp.screenshot({ path: OUT + "/phone-top.png" });
+  fs.writeFileSync(OUT + "/log.txt", log.join("\n"));
+  await browser.close();
+})();

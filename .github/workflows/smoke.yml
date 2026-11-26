@@ -1,0 +1,32 @@
+name: Live smoke test
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["js/**", "css/**", "index.html", "tools/smoke.js", ".github/workflows/smoke.yml"]
+permissions:
+  contents: write
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm install --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
+      - run: python3 -m http.server 8000 & sleep 2
+      - run: ./tools/probe.sh > /dev/null
+      - run: node tools/smoke.js
+      - name: Save results to the probe-results branch
+        if: always()
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          mkdir /tmp/pr && cp -r probe-results /tmp/pr/
+          git checkout --orphan probe-results
+          git rm -rf . -q
+          rm -rf node_modules
+          cp -r /tmp/pr/probe-results .
+          git add probe-results
+          git commit -qm "Smoke results $(date -u +%FT%TZ)"
+          git push -f origin probe-results
