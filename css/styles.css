@@ -177,6 +177,9 @@ select { padding-right: 6px; max-width: 100%; }
 .now-main { display: flex; align-items: center; gap: 14px; }
 .now-temp { font-family: var(--font-head); font-size: 3.4rem; font-weight: 600; line-height: 1; }
 .now-desc { font-weight: 700; }
+.now-forecast { background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; margin: 12px 0; padding: 8px 12px; }
+.now-forecast h3 { font-size: 0.85em; font-weight: 700; margin: 0 0 2px; }
+.now-forecast p { margin: 0; }
 .facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px 16px; margin: 0; }
 .facts div { min-width: 0; }
 .facts dt { font-size: 0.75em; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }

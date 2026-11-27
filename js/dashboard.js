@@ -136,8 +136,13 @@
         <div>
           <div class="now-temp">${fmt.tC(c.temperature_2m)}</div>
           <div class="now-desc">${esc(W.wx.desc(c.weather_code))}</div>
-          <div class="muted">Feels like ${fmt.tC(c.apparent_temperature)} · Today ${fmt.tC(td.max)} / ${fmt.tC(td.min)}</div>
+          <div class="muted">Feels like ${fmt.tC(c.apparent_temperature)}</div>
         </div>
+      </div>
+      <div class="now-forecast">
+        <h3>Today’s forecast</h3>
+        <p><strong>${esc(W.wx.desc(td.code))}</strong></p>
+        <p class="muted">Low ${fmt.tC(td.min)} · High ${fmt.tC(td.max)}${td.pop != null ? ` · ${fmt.pct(td.pop)} precipitation chance` : ""}</p>
       </div>
       <dl class="facts">
         <div><dt>Humidity</dt><dd>${fmt.pct(c.relative_humidity_2m)}</dd></div>
