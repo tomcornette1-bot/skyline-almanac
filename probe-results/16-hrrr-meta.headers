@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+Date: Fri, 27 Nov 2026 13:48:37 GMT
+Server: Apache/2.4.62 (AlmaLinux) OpenSSL/3.5.9 mod_fcgid/2.3.9 mod_wsgi/6.1.1 Python/3.14
+Last-Modified: Fri, 27 Nov 2026 12:39:00 GMT
+ETag: "70-661415830a804"
+Accept-Ranges: bytes
+Content-Length: 112
+X-IEM-ServerID: iemvs40-dc.agron.iastate.edu
+Access-Control-Allow-Origin: *
+Content-Type: application/json
+

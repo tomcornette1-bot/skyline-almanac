@@ -1,0 +1,120 @@
+forecast                     000  NO-CORS-HEADER
+  https://api.open-meteo.com/v1/forecast?latitude=39.1736&longitude=-78.1729&timezone=auto&timeformat=unixtime&past_days=7&forecast_days=9&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,is_day,wind_speed_10m,wind_direction_10m,wind_gusts_10m&hourly=temperature_2m,relative_humidity_2m,pressure_msl,weather_code,is_day,precipitation_probability,precipitation,rain,showers,snowfall,cloud_cover,wind_speed_10m,wind_direction_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,rain_sum,showers_sum,snowfall_sum,sunrise,sunset
+  
+
+grid-multi                   000  NO-CORS-HEADER
+  https://api.open-meteo.com/v1/forecast?latitude=39.1,39.5&longitude=-78.1,-77.5&timezone=GMT&timeformat=unixtime&past_days=2&forecast_days=2&hourly=temperature_2m,wind_speed_10m,wind_direction_10m,precipitation,rain,showers,snowfall
+  
+
+airquality                   200  access-control-allow-origin: *
+  https://air-quality-api.open-meteo.com/v1/air-quality?latitude=39.1736&longitude=-78.1729&timezone=auto&timeformat=unixtime&current=us_aqi,pm2_5,ozone
+  {"latitude":39.199997,"longitude":-78.2,"generationtime_ms":0.35691261291503906,"utc_offset_seconds":-18000,"timezone":"America/New_York","timezone_abbreviation":"GMT-5","elevation":229.0,"current_units":{"time":"unixtime","interval":"seconds","us_aqi":"USAQI","pm2_5":"Œºg/m¬≥","ozone":"Œºg/m¬≥"},"current":{"time":1795784400,"interval":3600,"us_aqi":18,"pm2_5":0.9,"ozone":41.0}}
+
+geocode                      200  access-control-allow-origin: *
+  https://geocoding-api.open-meteo.com/v1/search?name=Winchester&count=20&language=en&format=json
+  {"results":[{"id":4794120,"name":"Winchester","latitude":39.18566,"longitude":-78.16333,"elevation":216.0,"feature_code":"PPLA2","country_code":"US","admin1_id":6254928,"admin2_id":4794134,"timezone":"America/New_York","population":27284,"postcodes":["22601","22604"],"country_id":6252001,"country":"United States","admin1":"Virginia","admin2":"Winchester"},{"id":4313697,"name":"Winchester","latitude":37.99008,"longitude":-84.17965,"elevation":303.0,"feature_code":"PPLA2","country_code":"US","admin1_id":6254925,"admin2_id":4287837,"timezone":"America/New_York","population":18446,"postcodes":["40
+
+singlerun-gfs_global         200  access-control-allow-origin: *
+  https://single-runs-api.open-meteo.com/v1/forecast?latitude=39.1736&longitude=-78.1729&models=gfs_global&run=2026-11-24T00:00&hourly=temperature_2m&timeformat=unixtime&timezone=GMT&forecast_days=8
+  {"latitude":39.186462,"longitude":-78.16406,"generationtime_ms":0.042438507080078125,"utc_offset_seconds":0,"timezone":"GMT","timezone_abbreviation":"GMT","elevation":229.0,"hourly_units":{"time":"unixtime","temperature_2m":"¬∞C"},"hourly":{"time":[1795478400,1795482000,1795485600,1795489200,1795492800,1795496400,1795500000,1795503600,1795507200,1795510800,1795514400,1795518000,1795521600,1795525200,1795528800,1795532400,1795536000,1795539600,1795543200,1795546800,1795550400,1795554000,1795557600,1795561200,1795564800,1795568400,1795572000,1795575600,1795579200,1795582800,1795586400,1795590000
+
+singlerun-gfs_seamless       200  access-control-allow-origin: *
+  https://single-runs-api.open-meteo.com/v1/forecast?latitude=39.1736&longitude=-78.1729&models=gfs_seamless&run=2026-11-24T00:00&hourly=temperature_2m&timeformat=unixtime&timezone=GMT&forecast_days=8
+  {"latitude":39.166424,"longitude":-78.15803,"generationtime_ms":70.53899765014648,"utc_offset_seconds":0,"timezone":"GMT","timezone_abbreviation":"GMT","elevation":229.0,"hourly_units":{"time":"unixtime","temperature_2m":"¬∞C"},"hourly":{"time":[1795478400,1795482000,1795485600,1795489200,1795492800,1795496400,1795500000,1795503600,1795507200,1795510800,1795514400,1795518000,1795521600,1795525200,1795528800,1795532400,1795536000,1795539600,1795543200,1795546800,1795550400,1795554000,1795557600,1795561200,1795564800,1795568400,1795572000,1795575600,1795579200,1795582800,1795586400,1795590000,17
+
+singlerun-ncep_gfs025        200  access-control-allow-origin: *
+  https://single-runs-api.open-meteo.com/v1/forecast?latitude=39.1736&longitude=-78.1729&models=ncep_gfs025&run=2026-11-24T00:00&hourly=temperature_2m&timeformat=unixtime&timezone=GMT&forecast_days=8
+  {"latitude":39.25,"longitude":-78.25,"generationtime_ms":0.0959634780883789,"utc_offset_seconds":0,"timezone":"GMT","timezone_abbreviation":"GMT","elevation":229.0,"hourly_units":{"time":"unixtime","temperature_2m":"undefined"},"hourly":{"time":[1795478400,1795482000,1795485600,1795489200,1795492800,1795496400,1795500000,1795503600,1795507200,1795510800,1795514400,1795518000,1795521600,1795525200,1795528800,1795532400,1795536000,1795539600,1795543200,1795546800,1795550400,1795554000,1795557600,1795561200,1795564800,1795568400,1795572000,1795575600,1795579200,1795582800,1795586400,1795590000,17
+
+singlerun-gfs025             200  access-control-allow-origin: *
+  https://single-runs-api.open-meteo.com/v1/forecast?latitude=39.1736&longitude=-78.1729&models=gfs025&run=2026-11-24T00:00&hourly=temperature_2m&timeformat=unixtime&timezone=GMT&forecast_days=8
+  {"latitude":39.25,"longitude":-78.25,"generationtime_ms":0.023484230041503906,"utc_offset_seconds":0,"timezone":"GMT","timezone_abbreviation":"GMT","elevation":229.0,"hourly_units":{"time":"unixtime","temperature_2m":"undefined"},"hourly":{"time":[1795478400,1795482000,1795485600,1795489200,1795492800,1795496400,1795500000,1795503600,1795507200,1795510800,1795514400,1795518000,1795521600,1795525200,1795528800,1795532400,1795536000,1795539600,1795543200,1795546800,1795550400,1795554000,1795557600,1795561200,1795564800,1795568400,1795572000,1795575600,1795579200,1795582800,1795586400,1795590000,
+
+singlerun-ncep_gfs_global    200  access-control-allow-origin: *
+  https://single-runs-api.open-meteo.com/v1/forecast?latitude=39.1736&longitude=-78.1729&models=ncep_gfs_global&run=2026-11-24T00:00&hourly=temperature_2m&timeformat=unixtime&timezone=GMT&forecast_days=8
+  {"latitude":39.186462,"longitude":-78.16406,"generationtime_ms":0.04458427429199219,"utc_offset_seconds":0,"timezone":"GMT","timezone_abbreviation":"GMT","elevation":229.0,"hourly_units":{"time":"unixtime","temperature_2m":"¬∞C"},"hourly":{"time":[1795478400,1795482000,1795485600,1795489200,1795492800,1795496400,1795500000,1795503600,1795507200,1795510800,1795514400,1795518000,1795521600,1795525200,1795528800,1795532400,1795536000,1795539600,1795543200,1795546800,1795550400,1795554000,1795557600,1795561200,1795564800,1795568400,1795572000,1795575600,1795579200,1795582800,1795586400,1795590000,
+
+zip22601                     200  access-control-allow-origin: *
+  https://api.zippopotam.us/us/22601
+  {"country": "United States", "country abbreviation": "US", "post code": "22601", "places": [{"place name": "Winchester", "longitude": "-78.1827", "latitude": "39.1858", "state": "Virginia", "state abbreviation": "VA"}]}
+
+zip99999                     404  access-control-allow-origin: *
+  https://api.zippopotam.us/us/99999
+  {}
+
+nws-alerts                   200  access-control-allow-origin: *
+  https://api.weather.gov/alerts/active?point=39.1736,-78.1729
+  {     "@context": {         "@version": "1.1"     },     "type": "FeatureCollection",     "features": [],     "title": "Current watches, warnings, and advisories for 39.1736 N, 78.1729 W",     "updated": "2026-11-27T13:48:30+00:00" }
+
+nws-points                   200  access-control-allow-origin: *
+  https://api.weather.gov/points/39.1736,-78.1729
+  {     "@context": [         "https://geojson.org/geojson-ld/geojson-context.jsonld",         {             "@version": "1.1",             "wx": "https://api.weather.gov/ontology#",             "s": "https://schema.org/",             "geo": "http://www.opengis.net/ont/geosparql#",             "unit": "http://codes.wmo.int/common/unit/",             "@vocab": "https://api.weather.gov/ontology#",             "geometry": {                 "@id": "s:GeoCoordinates",                 "@type": "geo:wktLiteral"             },             "city": "s:addressLocality",             "state": "s:addressRegio
+
+nws-stations                 200  access-control-allow-origin: *
+  https://api.weather.gov/gridpoints/LWX/39,79/stations
+  {     "@context": [         "https://geojson.org/geojson-ld/geojson-context.jsonld",         {             "@version": "1.1",             "wx": "https://api.weather.gov/ontology#",             "s": "https://schema.org/",             "geo": "http://www.opengis.net/ont/geosparql#",             "unit": "http://codes.wmo.int/common/unit/",             "@vocab": "https://api.weather.gov/ontology#",             "geometry": {                 "@id": "s:GeoCoordinates",                 "@type": "geo:wktLiteral"             },             "city": "s:addressLocality",             "state": "s:addressRegio
+
+rainviewer                   200  access-control-allow-origin: *
+  https://api.rainviewer.com/public/weather-maps.json
+  {"version":"2.0","generated":1795787140,"host":"https://tilecache.rainviewer.com","radar":{"past":[{"time":1795779600,"path":"/v2/radar/ddeee2bcebce"},{"time":1795780200,"path":"/v2/radar/a7024b673b42"},{"time":1795780800,"path":"/v2/radar/9538825233d4"},{"time":1795781400,"path":"/v2/radar/b0d0ef86d010"},{"time":1795782000,"path":"/v2/radar/fcf705152b83"},{"time":1795782600,"path":"/v2/radar/a0b3b393ab69"},{"time":1795783200,"path":"/v2/radar/4b8f6bc4a305"},{"time":1795783800,"path":"/v2/radar/116f691d0ea9"},{"time":1795784400,"path":"/v2/radar/37b6048be38e"},{"time":1795785000,"path":"/v2/ra
+
+hrrr-meta                    200  Access-Control-Allow-Origin: *
+  https://mesonet.agron.iastate.edu/data/gis/images/4326/hrrr/refd_0000.json
+  {"model_init_utc": "2026-11-27T11:00:00Z", "forecast_minute": 0.0, "model_forecast_utc": "2026-11-27T11:00:00Z"}
+
+hrrr-meta-alt                200  Access-Control-Allow-Origin: *
+  https://mesonet.agron.iastate.edu/data/gis/images/4326/hrrr/refd_0060.json
+  {"model_init_utc": "2026-11-27T11:00:00Z", "forecast_minute": 60.0, "model_forecast_utc": "2026-11-27T12:00:00Z"}
+
+hrrr-tile                    200  Access-Control-Allow-Origin: *
+  https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/hrrr::REFD-F0060-0/6/18/24.png
+  âPNG  IHDR\r®fíIDATxúÌ›_è$UáqnÅÂè‡ÒŒBàFbà^`»&(†Y¢H4à		Å∏@ ¬öÖu+.∂]CVâ1J¢#^x·Ô¢úoÕ>ÕŸ⁄ÓôûÓÆ?›˝|í_ÿ]fz™{Í|Î‘9ß™.πdâ^;3™ﬂ≤Æ#?˚]]ßNè™e˛åyù=7™RßœÓ÷3ø˛C]gﬁU~<˚6æÙÍ®JΩıŒÓk¥πÕ•Øå™‘¨_ˇ¯”oV©GéûÆÎ∂?◊Mwü¨Îñ#[’±≠Q˝o>ˆz]«_’u√·™;œ}Z◊›€ˇÆÆ˙◊óÎ∫‚ÃµªıÍ5u˝‡œˇø^~ÔyΩ€qœ√ß™‘ïº∂:|ÚØuM⁄^~?ÕÁ˚˘{~^Í–ﬂÆØ~¯èˇ’5ÎgÚ‰süø˛S«FU*˚lj÷◊òU>˚Ô‹˚R]˘\i|ŒŸáÚ57ﬁ˛b]˘|e˚pu˘…´´/¸Ë≤Í≤GØ®ÎÚ≠´Î∫ÎÅWÍzËâ7¥tÊW'FU*;UÍª?˛m]C	>x>»4ä4˛‘A_ãHµ±≠ì4∫ºœ4Ê‘˜Fˇ¨Îº^@É}Ê¯N®Ìø;†¸û¸ô∆’'◊◊u˚kØÎñGœ^z∑>ˇ~ï"<¶@ˆõ4~~~j*ø/ ·B„'ÑÄ≤aœ∫øeyO4‘Y?€˝–ÿy›|ˆ7ﬁ±UW˛ŒA‰'ø¯}]lG>Î@*Åô:ÚÒÎÌ >€◊A·à√ŒC„Ô
+
+iem-OKV                      200  Access-Control-Allow-Origin: *
+  https://mesonet.agron.iastate.edu/api/1/daily.json?station=OKV&network=VA_ASOS&year=2026&month=11
+  {"schema":{"fields":[{"name":"index","type":"integer"},{"name":"station","type":"string","extDtype":"str"},{"name":"date","type":"string","extDtype":"str"},{"name":"max_tmpf","type":"number"},{"name":"min_tmpf","type":"number"},{"name":"precip","type":"number"},{"name":"max_gust","type":"number"},{"name":"snow","type":"string"},{"name":"snowd","type":"string"},{"name":"min_rh","type":"number"},{"name":"max_rh","type":"number"},{"name":"max_dwpf","type":"number"},{"name":"min_dwpf","type":"number"},{"name":"min_feel","type":"number"},{"name":"avg_feel","type":"number"},{"name":"max_feel","type"
+
+iem-DCA-VA                   200  Access-Control-Allow-Origin: *
+  https://mesonet.agron.iastate.edu/api/1/daily.json?station=DCA&network=VA_ASOS&year=2026&month=11
+  {"schema":{"fields":[{"name":"index","type":"integer"},{"name":"station","type":"string","extDtype":"str"},{"name":"date","type":"string","extDtype":"str"},{"name":"max_tmpf","type":"number"},{"name":"min_tmpf","type":"number"},{"name":"precip","type":"number"},{"name":"max_gust","type":"number"},{"name":"snow","type":"number"},{"name":"snowd","type":"number"},{"name":"min_rh","type":"number"},{"name":"max_rh","type":"number"},{"name":"max_dwpf","type":"number"},{"name":"min_dwpf","type":"number"},{"name":"min_feel","type":"number"},{"name":"avg_feel","type":"number"},{"name":"max_feel","type"
+
+iem-DCA-DC                   200  Access-Control-Allow-Origin: *
+  https://mesonet.agron.iastate.edu/api/1/daily.json?station=DCA&network=DC_ASOS&year=2026&month=11
+  {"schema":{"fields":[{"name":"index","type":"integer"},{"name":"station","type":"string"},{"name":"date","type":"string"},{"name":"max_tmpf","type":"string"},{"name":"min_tmpf","type":"string"},{"name":"precip","type":"string"},{"name":"max_gust","type":"string"},{"name":"snow","type":"string"},{"name":"snowd","type":"string"},{"name":"min_rh","type":"string"},{"name":"max_rh","type":"string"},{"name":"max_dwpf","type":"string"},{"name":"min_dwpf","type":"string"},{"name":"min_feel","type":"string"},{"name":"avg_feel","type":"string"},{"name":"max_feel","type":"string"},{"name":"max_drct","typ
+
+acis-same-USC00449186        200  access-control-allow-origin: *
+  https://data.rcc-acis.org/StnData?params=%7B%22sid%22%3A%22USC00449186%22%2C%22sdate%22%3A%221850-11-27%22%2C%22edate%22%3A%222025-11-27%22%2C%22elems%22%3A%5B%7B%22name%22%3A%22maxt%22%2C%22interval%22%3A%5B1%2C0%2C0%5D%7D%2C%7B%22name%22%3A%22mint%22%2C%22interval%22%3A%5B1%2C0%2C0%5D%7D%5D%2C%22meta%22%3A%22name%2Csids%2Cll%22%7D
+  {"meta":{"ll": [-78.15252, 39.10837], "sids": ["449186 2", "USC00449186 6", "WSTV2 7"], "name": "WINCHESTER 7 SE"}, "data":[["1850-11-27","M","M"], ["1851-11-27","M","M"], ["1852-11-27","M","M"], ["1853-11-27","M","M"], ["1854-11-27","M","M"], ["1855-11-27","M","M"], ["1856-11-27","M","M"], ["1857-11-27","M","M"], ["1858-11-27","M","M"], ["1859-11-27","M","M"], ["1860-11-27","M","M"], ["1861-11-27","M","M"], ["1862-11-27","M","M"], ["1863-11-27","M","M"], ["1864-11-27","M","M"], ["1865-11-27","M","M"], ["1866-11-27","M","M"], ["1867-11-27","M","M"], ["1868-11-27","M","M"], ["1869-11-27","M","M
+
+acis-same-USC00449186_6      200  access-control-allow-origin: *
+  https://data.rcc-acis.org/StnData?params=%7B%22sid%22%3A%22USC00449186%206%22%2C%22sdate%22%3A%221850-11-27%22%2C%22edate%22%3A%222025-11-27%22%2C%22elems%22%3A%5B%7B%22name%22%3A%22maxt%22%2C%22interval%22%3A%5B1%2C0%2C0%5D%7D%2C%7B%22name%22%3A%22mint%22%2C%22interval%22%3A%5B1%2C0%2C0%5D%7D%5D%2C%22meta%22%3A%22name%2Csids%2Cll%22%7D
+  {"meta":{"ll": [-78.15252, 39.10837], "sids": ["449186 2", "USC00449186 6", "WSTV2 7"], "name": "WINCHESTER 7 SE"}, "data":[["1850-11-27","M","M"], ["1851-11-27","M","M"], ["1852-11-27","M","M"], ["1853-11-27","M","M"], ["1854-11-27","M","M"], ["1855-11-27","M","M"], ["1856-11-27","M","M"], ["1857-11-27","M","M"], ["1858-11-27","M","M"], ["1859-11-27","M","M"], ["1860-11-27","M","M"], ["1861-11-27","M","M"], ["1862-11-27","M","M"], ["1863-11-27","M","M"], ["1864-11-27","M","M"], ["1865-11-27","M","M"], ["1866-11-27","M","M"], ["1867-11-27","M","M"], ["1868-11-27","M","M"], ["1869-11-27","M","M
+
+acis-same-449186             200  access-control-allow-origin: *
+  https://data.rcc-acis.org/StnData?params=%7B%22sid%22%3A%22449186%22%2C%22sdate%22%3A%221850-11-27%22%2C%22edate%22%3A%222025-11-27%22%2C%22elems%22%3A%5B%7B%22name%22%3A%22maxt%22%2C%22interval%22%3A%5B1%2C0%2C0%5D%7D%2C%7B%22name%22%3A%22mint%22%2C%22interval%22%3A%5B1%2C0%2C0%5D%7D%5D%2C%22meta%22%3A%22name%2Csids%2Cll%22%7D
+  {"meta":{"ll": [-78.15252, 39.10837], "sids": ["449186 2", "USC00449186 6", "WSTV2 7"], "name": "WINCHESTER 7 SE"}, "data":[["1850-11-27","M","M"], ["1851-11-27","M","M"], ["1852-11-27","M","M"], ["1853-11-27","M","M"], ["1854-11-27","M","M"], ["1855-11-27","M","M"], ["1856-11-27","M","M"], ["1857-11-27","M","M"], ["1858-11-27","M","M"], ["1859-11-27","M","M"], ["1860-11-27","M","M"], ["1861-11-27","M","M"], ["1862-11-27","M","M"], ["1863-11-27","M","M"], ["1864-11-27","M","M"], ["1865-11-27","M","M"], ["1866-11-27","M","M"], ["1867-11-27","M","M"], ["1868-11-27","M","M"], ["1869-11-27","M","M
+
+acis-same-USC00449181        200  access-control-allow-origin: *
+  https://data.rcc-acis.org/StnData?params=%7B%22sid%22%3A%22USC00449181%22%2C%22sdate%22%3A%221850-11-27%22%2C%22edate%22%3A%222025-11-27%22%2C%22elems%22%3A%5B%7B%22name%22%3A%22maxt%22%2C%22interval%22%3A%5B1%2C0%2C0%5D%7D%2C%7B%22name%22%3A%22mint%22%2C%22interval%22%3A%5B1%2C0%2C0%5D%7D%5D%2C%22meta%22%3A%22name%2Csids%2Cll%22%7D
+  {"meta":{"ll": [-78.1516, 39.18793], "sids": ["449181 2", "USC00449181 6", "WCHV2 7"], "name": "WINCHESTER"}, "data":[["1850-11-27","M","M"], ["1851-11-27","M","M"], ["1852-11-27","M","M"], ["1853-11-27","M","M"], ["1854-11-27","M","M"], ["1855-11-27","M","M"], ["1856-11-27","M","M"], ["1857-11-27","M","M"], ["1858-11-27","M","M"], ["1859-11-27","M","M"], ["1860-11-27","M","M"], ["1861-11-27","M","M"], ["1862-11-27","M","M"], ["1863-11-27","M","M"], ["1864-11-27","M","M"], ["1865-11-27","M","M"], ["1866-11-27","M","M"], ["1867-11-27","M","M"], ["1868-11-27","M","M"], ["1869-11-27","M","M"], ["
+
+acis-same-DCAthr_9           200  access-control-allow-origin: *
+  https://data.rcc-acis.org/StnData?params=%7B%22sid%22%3A%22DCAthr%209%22%2C%22sdate%22%3A%221850-11-27%22%2C%22edate%22%3A%222025-11-27%22%2C%22elems%22%3A%5B%7B%22name%22%3A%22maxt%22%2C%22interval%22%3A%5B1%2C0%2C0%5D%7D%2C%7B%22name%22%3A%22mint%22%2C%22interval%22%3A%5B1%2C0%2C0%5D%7D%5D%2C%22meta%22%3A%22name%2Csids%2Cll%22%7D
+  {"meta":{"sids": ["DCAthr 9"], "name": "Washington Area"}, "data":[["1850-11-27","M","M"], ["1851-11-27","M","M"], ["1852-11-27","M","M"], ["1853-11-27","M","M"], ["1854-11-27","M","M"], ["1855-11-27","M","M"], ["1856-11-27","M","M"], ["1857-11-27","M","M"], ["1858-11-27","M","M"], ["1859-11-27","M","M"], ["1860-11-27","M","M"], ["1861-11-27","M","M"], ["1862-11-27","M","M"], ["1863-11-27","M","M"], ["1864-11-27","M","M"], ["1865-11-27","M","M"], ["1866-11-27","M","M"], ["1867-11-27","M","M"], ["1868-11-27","M","M"], ["1869-11-27","M","M"], ["1870-11-27","M","M"], ["1871-11-27","M","M"], ["187
+
+acis-yearly                  200  access-control-allow-origin: *
+  https://data.rcc-acis.org/StnData?params=%7B%22sid%22%3A%22USC00449186%22%2C%22sdate%22%3A%22por%22%2C%22edate%22%3A%222025-12-31%22%2C%22elems%22%3A%5B%7B%22name%22%3A%22maxt%22%2C%22interval%22%3A%22yly%22%2C%22duration%22%3A%22yly%22%2C%22reduce%22%3A%7B%22reduce%22%3A%22max%22%2C%22add%22%3A%22date%2Cmcnt%22%7D%2C%22maxmissing%22%3A300%7D%2C%7B%22name%22%3A%22mint%22%2C%22interval%22%3A%22yly%22%2C%22duration%22%3A%22yly%22%2C%22reduce%22%3A%7B%22reduce%22%3A%22min%22%2C%22add%22%3A%22date%2Cmcnt%22%7D%2C%22maxmissing%22%3A300%7D%5D%2C%22meta%22%3A%22name%2Csids%2Cll%2Cvalid_daterange%22%7D
+  {"meta":{"ll": [-78.15252, 39.10837], "sids": ["449186 2", "USC00449186 6", "WSTV2 7"], "name": "WINCHESTER 7 SE", "valid_daterange": [["1912-04-01", "2026-11-18"], ["1912-04-01", "2026-11-18"]]}, "data":[["1912",["95","1912-07-15",101],["10","1912-12-26",93]], ["1913",["97","1913-07-01",13],["10","1913-02-13",4]], ["1914",["97","1914-08-20",4],["-5","1914-12-27",3]], ["1915",["96","1915-07-19",2],["11","1915-01-05",0]], ["1916",["96","1916-08-23",7],["2","1916-01-09",6]], ["1917",["99","1917-07-31",1],["-5","1917-12-30",3]], ["1918",["106","1918-08-06",39],["-4","1918-02-05",48]], ["1919",["1
+
+acis-yearly-dc               200  access-control-allow-origin: *
+  https://data.rcc-acis.org/StnData?params=%7B%22sid%22%3A%22DCAthr%209%22%2C%22sdate%22%3A%22por%22%2C%22edate%22%3A%222025-12-31%22%2C%22elems%22%3A%5B%7B%22name%22%3A%22maxt%22%2C%22interval%22%3A%22yly%22%2C%22duration%22%3A%22yly%22%2C%22reduce%22%3A%7B%22reduce%22%3A%22max%22%2C%22add%22%3A%22date%2Cmcnt%22%7D%2C%22maxmissing%22%3A300%7D%2C%7B%22name%22%3A%22mint%22%2C%22interval%22%3A%22yly%22%2C%22duration%22%3A%22yly%22%2C%22reduce%22%3A%7B%22reduce%22%3A%22min%22%2C%22add%22%3A%22date%2Cmcnt%22%7D%2C%22maxmissing%22%3A300%7D%5D%2C%22meta%22%3A%22name%2Csids%2Cll%2Cvalid_daterange%22%7D
+  {"meta":{"sids": ["DCAthr 9"], "name": "Washington Area", "valid_daterange": [["1871-01-01", "2026-11-26"], ["1871-01-01", "2026-11-26"]]}, "data":[["1871",["M","M",365],["M","M",365]], ["1872",["101","1872-07-03",4],["3","1872-12-22",4]], ["1873",["101","1873-07-03",0],["-6","1873-01-30",0]], ["1874",["102","1874-06-09",0],["9","1874-01-18",0]], ["1875",["98","1875-06-25",0],["-3","1875-01-10",0]], ["1876",["98","1876-07-20",0],["4","1876-12-10",0]], ["1877",["98","1877-07-27",0],["-3","1877-01-05",0]], ["1878",["98","1878-07-18",0],["-0","1878-01-08",0]], ["1879",["102","1879-07-16",0],["-0"
+
+acis-stnmeta                 200  access-control-allow-origin: *
+  https://data.rcc-acis.org/StnMeta?params=%7B%22bbox%22%3A%22-84.53%2C37.64%2C-83.83%2C38.34%22%2C%22elems%22%3A%22maxt%22%2C%22meta%22%3A%22name%2Csids%2Cll%2Cvalid_daterange%22%7D
+  {"meta":[ {"valid_daterange": [["1970-12-01", "1970-12-31"]], "ll": [-83.95, 37.66667], "sids": ["156679 2", "USC00156679 6"], "name": "RAVENNA LOCK 12"}, {"valid_daterange": [["1893-01-01", "1977-06-30"]], "ll": [-84.3, 37.73333], "sids": ["156805 2", "USC00156805 6"], "name": "RICHMOND"}, {"valid_daterange": [["1977-09-01", "2001-11-30"]], "ll": [-84.33333, 37.75], "sids": ["152409 2", "USC00152409 6", "RICK2 7"], "name": "EASTERN KENTUCKY UNIV"}, {"valid_daterange": [["1895-01-22", "1944-10-31"]], "ll": [-84.26667, 37.91667], "sids": ["93889 1", "158757 2", "USC00158757 6"], "name": "WINCHE
+
+acis-feb29                   200  access-control-allow-origin: *
+  https://data.rcc-acis.org/StnData?params=%7B%22sid%22%3A%22DCAthr%209%22%2C%22sdate%22%3A%221852-02-29%22%2C%22edate%22%3A%222024-02-29%22%2C%22elems%22%3A%5B%7B%22name%22%3A%22maxt%22%2C%22interval%22%3A%5B4%2C0%2C0%5D%7D%5D%7D
+  {"meta":{"state": "DC", "sids": ["DCAthr 9"], "uid": 32704, "name": "Washington Area"}, "data":[["1852-02-29","M"], ["1856-02-29","M"], ["1860-02-29","M"], ["1864-02-29","M"], ["1868-02-29","M"], ["1872-02-29","32"], ["1876-02-29","38"], ["1880-02-29","70"], ["1884-02-29","20"], ["1888-02-29","38"], ["1892-02-29","43"], ["1896-02-29","55"], ["1900-02-28","48"], ["1904-02-29","39"], ["1908-02-29","44"], ["1912-02-29","40"], ["1916-02-29","36"], ["1920-02-29","39"], ["1924-02-29","40"], ["1928-02-29","60"], ["1932-02-29","59"], ["1936-02-29","54"], ["1940-02-29","45"], ["1944-02-29","39"], ["194
+

@@ -1,0 +1,11 @@
+HTTP/2 200 
+date: Fri, 27 Nov 2026 13:48:41 GMT
+content-type: application/json
+cf-ray: a61197841fb775a8-SEA
+cf-cache-status: DYNAMIC
+access-control-allow-origin: *
+server: cloudflare
+x-rcc-host: nrcc 0
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=kISECRitUNjbdq2iz8rmrDwbZErtEZK3Gl9jvR011aufhs8d3FgaR0NaQkp%2FmmgBVdMrP5JgwZGb5kA52aUV%2F2hhN0ws0iulMIY5aL6SW0WvM9U%2BusTFg0hnbH2nt6U4zvTF"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+

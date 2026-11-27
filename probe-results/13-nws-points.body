@@ -1,0 +1,112 @@
+{
+    "@context": [
+        "https://geojson.org/geojson-ld/geojson-context.jsonld",
+        {
+            "@version": "1.1",
+            "wx": "https://api.weather.gov/ontology#",
+            "s": "https://schema.org/",
+            "geo": "http://www.opengis.net/ont/geosparql#",
+            "unit": "http://codes.wmo.int/common/unit/",
+            "@vocab": "https://api.weather.gov/ontology#",
+            "geometry": {
+                "@id": "s:GeoCoordinates",
+                "@type": "geo:wktLiteral"
+            },
+            "city": "s:addressLocality",
+            "state": "s:addressRegion",
+            "distance": {
+                "@id": "s:Distance",
+                "@type": "s:QuantitativeValue"
+            },
+            "bearing": {
+                "@type": "s:QuantitativeValue"
+            },
+            "value": {
+                "@id": "s:value"
+            },
+            "unitCode": {
+                "@id": "s:unitCode",
+                "@type": "@id"
+            },
+            "forecastOffice": {
+                "@type": "@id"
+            },
+            "forecastGridData": {
+                "@type": "@id"
+            },
+            "publicZone": {
+                "@type": "@id"
+            },
+            "county": {
+                "@type": "@id"
+            }
+        }
+    ],
+    "id": "https://api.weather.gov/points/39.1736,-78.1729",
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            -78.1729,
+            39.1736
+        ]
+    },
+    "properties": {
+        "@id": "https://api.weather.gov/points/39.1736,-78.1729",
+        "@type": "wx:Point",
+        "cwa": "LWX",
+        "type": "land",
+        "forecastOffice": "https://api.weather.gov/offices/LWX",
+        "gridId": "LWX",
+        "gridX": 55,
+        "gridY": 79,
+        "forecast": "https://api.weather.gov/gridpoints/LWX/55,79/forecast",
+        "forecastHourly": "https://api.weather.gov/gridpoints/LWX/55,79/forecast/hourly",
+        "forecastGridData": "https://api.weather.gov/gridpoints/LWX/55,79",
+        "observationStations": "https://api.weather.gov/gridpoints/LWX/55,79/stations",
+        "relativeLocation": {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -78.1763562,
+                    39.1738688
+                ]
+            },
+            "properties": {
+                "city": "Winchester",
+                "state": "VA",
+                "distance": {
+                    "unitCode": "wmoUnit:m",
+                    "value": 0
+                },
+                "bearing": {
+                    "unitCode": "wmoUnit:degree_(angle)",
+                    "value": 0
+                }
+            }
+        },
+        "forecastZone": "https://api.weather.gov/zones/forecast/VAZ028",
+        "county": "https://api.weather.gov/zones/county/VAC840",
+        "fireWeatherZone": "https://api.weather.gov/zones/fire/VAZ028",
+        "timeZone": "America/New_York",
+        "radarStation": "KLWX",
+        "astronomicalData": {
+            "sunrise": "2026-11-26T07:08:07-05:00",
+            "sunset": "2026-11-26T16:51:58-05:00",
+            "transit": "2026-11-26T12:00:02-05:00",
+            "civilTwilightBegin": "2026-11-26T06:38:55-05:00",
+            "civilTwilightEnd": "2026-11-26T17:21:10-05:00",
+            "nauticalTwilightBegin": "2026-11-26T06:05:59-05:00",
+            "nauticalTwilightEnd": "2026-11-26T17:54:06-05:00",
+            "astronomicalTwilightBegin": "2026-11-26T05:33:54-05:00",
+            "astronomicalTwilightEnd": "2026-11-26T18:26:10-05:00"
+        },
+        "nwr": {
+            "transmitter": "WXM42",
+            "sameCode": "051840",
+            "areaBroadcast": "https://api.weather.gov/radio/WXM42/broadcast",
+            "pointBroadcast": "https://api.weather.gov/points/39.1736,-78.1729/radio"
+        }
+    }
+}

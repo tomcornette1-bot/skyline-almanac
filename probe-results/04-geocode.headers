@@ -1,0 +1,12 @@
+HTTP/1.1 200 OK
+Date: Fri, 27 Nov 2026 13:48:32 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 7118
+Connection: keep-alive
+X-Encoding-Time: 0.26047229766845703 ms
+cache-control: public, max-age=86400
+access-control-allow-origin: *
+access-control-allow-headers: accept, authorization, content-type, origin, x-requested-with
+access-control-allow-methods: GET, OPTIONS
+access-control-max-age: 600
+

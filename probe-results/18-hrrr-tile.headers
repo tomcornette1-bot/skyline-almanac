@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Date: Fri, 27 Nov 2026 13:48:38 GMT
+Server: gunicorn
+Content-Type: image/png
+Cache-Control: public, max-age=300
+Expires: Fri, 27 Nov 2026 13:53:38 GMT
+X-IEM-ServerID: iemvs41-dc.agron.iastate.edu
+Access-Control-Allow-Origin: *
+Transfer-Encoding: chunked
+

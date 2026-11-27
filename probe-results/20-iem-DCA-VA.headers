@@ -1,0 +1,12 @@
+HTTP/1.1 200 OK
+Date: Fri, 27 Nov 2026 13:48:38 GMT
+Server: nginx/1.20.1
+Content-Type: application/json
+Content-Length: 14971
+cache-control: public, max-age=300
+X-Cache-Status: EXPIRED
+X-No-Cache: 0
+X-Cache-Control: public, max-age=300
+X-IEM-ServerID: iemvs42-dc.agron.iastate.edu
+Access-Control-Allow-Origin: *
+

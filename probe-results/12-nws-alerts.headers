@@ -1,0 +1,17 @@
+HTTP/2 200 
+server: nginx/1.28.3
+content-type: application/geo+json
+etag: W/"375185092f6d1805d2a2fc2dd09a9b88"
+access-control-allow-origin: *
+access-control-expose-headers: X-Correlation-Id, X-Request-Id, X-Server-Id
+x-request-id: 01a21d43-de97-7855-b9d8-bb7bf19fb971
+x-correlation-id: 9c4c8119
+x-server-id: vm-bldr-api-ops-app5.ncep.noaa.gov
+cache-control: public, max-age=5, s-maxage=5
+expires: Fri, 27 Nov 2026 13:48:41 GMT
+date: Fri, 27 Nov 2026 13:48:36 GMT
+content-length: 233
+x-edge-request-id: 77fdc39d
+vary: Accept,Feature-Flags,Accept-Language
+strict-transport-security: max-age=31536000 ; includeSubDomains ; preload
+
